@@ -1,12 +1,14 @@
-var friends = require("../data/friends.js");
+require("../data/friends.js");
 
-function routeAPI() {
+
+module.exports = (app) => {
+    
     app.get("/api/friends", (req, res) => {
         return res.json(friends.data);
     });
-}
 
-function addFriend() {
+
+
     app.post("/api/friends", (req, res) => {
 
         var newFriend = req.body;
@@ -22,9 +24,6 @@ function addFriend() {
         res.json(newFriend);
 
     });
+
 }
 
-module.exports = {
-    routeAPI,
-    addFriend
-}
