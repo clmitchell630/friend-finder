@@ -1,10 +1,10 @@
-require("../data/friends.js");
+var friends = require("../data/friends.js");
 
 
 module.exports = (app) => {
-    
+
     app.get("/api/friends", (req, res) => {
-        return res.json(friends.data);
+        res.json(friends);
     });
 
 
@@ -13,16 +13,28 @@ module.exports = (app) => {
 
         var newFriend = req.body;
 
-        newFriend.routeName = newFriend.name.replace(/\s+/g, "").toLowerCase();
+        // console.log(newFriend);
 
-        console.log(newFriend);
+        var minDif;
+        var myFriend;
+        
+        for (var f in friends) {
+            // f = friends[k]\
+            var difference = 0;
+        
+            for (var i = 0; i < friends[f].scores.length; i++) {
+                difference += Math.abs(friends[f].scores[i] - newFriend.scores[i]);
+            }
+        
+            if(minDif === undefined || difference < minDif) {
+                minDif = difference;
+                myFriend = friends[f];
+            }
+            
+        }
 
-        var bff = friends.data;
-
-        bff.push(newFriend);
-
-        res.json(newFriend);
-
+        friends.push(newFriend);
+        res.send(myFriend.name);
     });
 
 }
