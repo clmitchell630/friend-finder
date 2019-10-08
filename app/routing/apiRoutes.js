@@ -34,7 +34,7 @@ module.exports = (app) => {
         }
 
         friends.push(newFriend);
-        res.send(myFriend.name);
+        res.send(myFriend);
     });
 
 }
