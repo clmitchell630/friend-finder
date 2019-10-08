@@ -19,7 +19,7 @@ module.exports = (app) => {
         var myFriend;
         
         for (var f in friends) {
-            // f = friends[k]\
+           
             var difference = 0;
         
             for (var i = 0; i < friends[f].scores.length; i++) {
